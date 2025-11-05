@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -92,7 +93,7 @@ private fun LoginScreen(
                 .fillMaxSize()
                 .padding(horizontal = 16.dp)
                 .padding(vertical = 32.dp)
-                .padding(top = 16.dp)
+                .systemBarsPadding()
         ) {
             Text(
                 text = stringResource(id = R.string.hi_there),
