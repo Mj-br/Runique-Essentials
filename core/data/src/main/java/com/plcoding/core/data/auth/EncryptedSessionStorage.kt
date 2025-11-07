@@ -5,8 +5,8 @@ import com.plcoding.core.domain.AuthInfo
 import com.plcoding.core.domain.SessionStorage
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
+import androidx.core.content.edit
 
 class EncryptedSessionStorage(
     private val sharedPreferences: SharedPreferences
@@ -24,15 +24,15 @@ class EncryptedSessionStorage(
     override suspend fun set(info: AuthInfo?) {
         withContext(Dispatchers.IO) {
             if(info == null) {
-                sharedPreferences.edit().remove(KEY_AUTH_INFO).commit()
+                sharedPreferences.edit(commit = true) { remove(KEY_AUTH_INFO) }
                 return@withContext
             }
 
             val json = Json.encodeToString(info.toAuthInfoSerializable())
             sharedPreferences
-                .edit()
-                .putString(KEY_AUTH_INFO, json)
-                .commit()
+                .edit(commit = true) {
+                    putString(KEY_AUTH_INFO, json)
+                }
         }
     }
 

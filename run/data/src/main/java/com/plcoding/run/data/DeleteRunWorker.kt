@@ -5,7 +5,6 @@ import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
 import com.plcoding.core.database.dao.RunPendingSyncDao
 import com.plcoding.core.domain.run.RemoteRunDataSource
-import com.plcoding.core.domain.util.Result
 
 class DeleteRunWorker(
     context: Context,

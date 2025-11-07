@@ -1,6 +1,5 @@
 package com.plcoding.core.data.networking
 
-import android.provider.ContactsContract.Data
 import com.plcoding.core.data.BuildConfig
 import com.plcoding.core.domain.util.DataError
 import com.plcoding.core.domain.util.Result

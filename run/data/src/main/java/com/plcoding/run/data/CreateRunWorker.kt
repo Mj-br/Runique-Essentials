@@ -6,7 +6,6 @@ import androidx.work.WorkerParameters
 import com.plcoding.core.database.dao.RunPendingSyncDao
 import com.plcoding.core.database.mappers.toRun
 import com.plcoding.core.domain.run.RemoteRunDataSource
-import com.plcoding.core.domain.util.Result
 
 class CreateRunWorker(
     context: Context,
