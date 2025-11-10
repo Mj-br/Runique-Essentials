@@ -23,14 +23,13 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.runningFold
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
-import kotlinx.coroutines.flow.zip
 import kotlin.math.roundToInt
 import kotlin.time.Duration
 import kotlin.time.Duration.Companion.seconds
 
 class RunningTracker(
     private val locationObserver: LocationObserver,
-    private val applicationScope: CoroutineScope,
+    applicationScope: CoroutineScope,
     private val watchConnector: WatchConnector
 ) {
     private val _runData = MutableStateFlow(RunData())

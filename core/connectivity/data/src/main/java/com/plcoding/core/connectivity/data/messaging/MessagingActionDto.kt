@@ -1,6 +1,5 @@
 package com.plcoding.core.connectivity.data.messaging
 
-import com.plcoding.core.connectivity.domain.messaging.MessagingAction
 import kotlinx.serialization.Serializable
 import kotlin.time.Duration
 

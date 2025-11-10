@@ -21,6 +21,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.joinAll
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
@@ -147,8 +148,8 @@ class OfflineFirstRunRepository(
                     }
                 }
 
-            createJobs.forEach { it.join() }
-            deleteJobs.forEach { it.join() }
+            createJobs.joinAll()
+            deleteJobs.joinAll()
         }
     }
 

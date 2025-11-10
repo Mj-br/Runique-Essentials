@@ -27,6 +27,7 @@ import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.MapsInitializer
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.gms.maps.model.MapStyleOptions
@@ -59,6 +60,10 @@ fun TrackerMap(
     val context = LocalContext.current
     val mapStyle = remember {
         MapStyleOptions.loadRawResourceStyle(context, R.raw.map_style)
+    }
+
+    LaunchedEffect(Unit) {
+        MapsInitializer.initialize(context)
     }
     val cameraPositionState = rememberCameraPositionState()
     val markerState = rememberMarkerState()

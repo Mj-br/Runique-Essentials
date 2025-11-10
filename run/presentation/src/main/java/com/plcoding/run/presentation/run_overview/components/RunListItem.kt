@@ -50,7 +50,6 @@ import com.plcoding.core.domain.run.Run
 import com.plcoding.core.presentation.designsystem.CalendarIcon
 import com.plcoding.core.presentation.designsystem.RunOutlinedIcon
 import com.plcoding.core.presentation.designsystem.RuniqueTheme
-import com.plcoding.run.domain.RunData
 import com.plcoding.run.presentation.R
 import com.plcoding.run.presentation.run_overview.mapper.toRunUi
 import com.plcoding.run.presentation.run_overview.model.RunDataUi

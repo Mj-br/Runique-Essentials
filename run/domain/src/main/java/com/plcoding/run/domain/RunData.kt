@@ -1,6 +1,5 @@
 package com.plcoding.run.domain
 
-import com.plcoding.core.domain.location.Location
 import com.plcoding.core.domain.location.LocationTimestamp
 import kotlin.time.Duration
 
