@@ -12,10 +12,7 @@ class AndroidApplicationConventionPlugin : Plugin<Project> {
 
     override fun apply(target: Project) {
         target.run {
-            pluginManager.run {
-                apply("com.android.application")
-                apply("org.jetbrains.kotlin.android")
-            }
+            pluginManager.apply("com.android.application")
             extensions.configure<ApplicationExtension> {
                 defaultConfig {
                     applicationId = libs.findVersion("projectApplicationId").get().toString()
