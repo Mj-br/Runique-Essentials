@@ -6,6 +6,7 @@ import com.android.build.api.dsl.CommonExtension
 import com.android.build.api.dsl.DynamicFeatureExtension
 import com.android.build.api.dsl.LibraryExtension
 import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
+import java.io.File
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
 
@@ -13,42 +14,51 @@ internal fun Project.configureBuildTypes(
     commonExtension: CommonExtension,
     extensionType: ExtensionType
 ) {
-    commonExtension.buildFeatures.buildConfig = true
+    commonExtension.buildFeatures.apply { buildConfig = true }
 
     val apiKey = gradleLocalProperties(rootDir, rootProject.providers).getProperty("API_KEY")
     when(extensionType) {
         ExtensionType.APPLICATION -> {
-            extensions.configure<ApplicationExtension> {
+            this@configureBuildTypes.extensions.configure<ApplicationExtension> {
                 buildTypes {
                     debug {
                         configureDebugBuildType(apiKey)
                     }
                     release {
-                        configureReleaseBuildType(commonExtension, apiKey)
+                        configureReleaseBuildType(
+                            defaultProguardFile = getDefaultProguardFile("proguard-android-optimize.txt"),
+                            apiKey = apiKey
+                        )
                     }
                 }
             }
         }
         ExtensionType.LIBRARY -> {
-            extensions.configure<LibraryExtension> {
+            this@configureBuildTypes.extensions.configure<LibraryExtension> {
                 buildTypes {
                     debug {
                         configureDebugBuildType(apiKey)
                     }
                     release {
-                        configureReleaseBuildType(commonExtension, apiKey)
+                        configureReleaseBuildType(
+                            defaultProguardFile = getDefaultProguardFile("proguard-android-optimize.txt"),
+                            apiKey = apiKey
+                        )
                     }
                 }
             }
         }
         ExtensionType.DYNAMIC_FEATURE -> {
-            extensions.configure<DynamicFeatureExtension> {
+            this@configureBuildTypes.extensions.configure<DynamicFeatureExtension> {
                 buildTypes {
                     debug {
                         configureDebugBuildType(apiKey)
                     }
                     release {
-                        configureReleaseBuildType(commonExtension, apiKey)
+                        configureReleaseBuildType(
+                            defaultProguardFile = getDefaultProguardFile("proguard-android-optimize.txt"),
+                            apiKey = apiKey
+                        )
                         isMinifyEnabled = false
                     }
                 }
@@ -63,15 +73,15 @@ private fun BuildType.configureDebugBuildType(apiKey: String) {
 }
 
 private fun BuildType.configureReleaseBuildType(
-    commonExtension: CommonExtension,
-    apiKey: String
+    defaultProguardFile: File,
+    apiKey: String,
 ) {
     buildConfigField("String", "API_KEY", "\"$apiKey\"")
     buildConfigField("String", "BASE_URL", "\"https://runique.pl-coding.com:8080\"")
 
     isMinifyEnabled = true
     proguardFiles(
-        commonExtension.getDefaultProguardFile("proguard-android-optimize.txt"),
+        defaultProguardFile,
         "proguard-rules.pro"
     )
 }
