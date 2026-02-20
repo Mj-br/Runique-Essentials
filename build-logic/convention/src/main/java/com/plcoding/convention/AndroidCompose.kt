@@ -8,7 +8,7 @@ internal fun Project.configureAndroidCompose(
     commonExtension: CommonExtension
 ) {
     commonExtension.buildFeatures.apply { compose = true }
-    
+
     this@configureAndroidCompose.dependencies {
         val bom = libs.findLibrary("androidx.compose.bom").get()
         "api"(platform(bom))
