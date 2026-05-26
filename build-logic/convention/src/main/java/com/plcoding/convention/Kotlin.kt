@@ -11,17 +11,17 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 internal fun Project.configureKotlinAndroid(
-    commonExtension: CommonExtension<*, *, *, *, *, *>
+    commonExtension: CommonExtension
 ) {
     commonExtension.apply {
         compileSdk = libs.findVersion("projectCompileSdkVersion").get().toString().toInt()
 
         defaultConfig.minSdk = libs.findVersion("projectMinSdkVersion").get().toString().toInt()
 
-        compileOptions {
+        compileOptions.apply {
             isCoreLibraryDesugaringEnabled = true
-            sourceCompatibility = JavaVersion.VERSION_11
-            targetCompatibility = JavaVersion.VERSION_11
+            sourceCompatibility = JavaVersion.VERSION_17
+            targetCompatibility = JavaVersion.VERSION_17
         }
     }
 
@@ -34,8 +34,8 @@ internal fun Project.configureKotlinAndroid(
 
 internal fun Project.configureKotlinJvm() {
     extensions.configure<JavaPluginExtension> {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     configureKotlin()
 }
@@ -43,7 +43,7 @@ internal fun Project.configureKotlinJvm() {
 private fun Project.configureKotlin() {
     tasks.withType<KotlinCompile>().configureEach {
         compilerOptions {
-            jvmTarget.set(JvmTarget.JVM_11)
+            jvmTarget.set(JvmTarget.JVM_17)
         }
     }
 }
